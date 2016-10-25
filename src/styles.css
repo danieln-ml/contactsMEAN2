@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #1b242c !important;
+  color: white !important;
+}
+.list-group-item {
+    background-color: #4d4d4d !important;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: #337ab7 !important;
+    border-color: white !important;
+}
+#header {
+    height: 91px !important;
+}
+#header {
+    background-color: #2e3843;
+    background: linear-gradient(to bottom, #2e3843 0%, #424d56 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-style: none !important;
+}
+
+#header .logo {
+    margin-left: 20%;
+    padding-top: 3px !important;
+    float: left;
+    margin-top: 21px;
+}
+
+#header .logo a {
+    display: block;
+    text-indent: -999em;
+    width: 146px;
+    height: 53px;
+
+    background: url('https://mlab.com/base/img/mLab-logo-dark.svg');
+    background-image: url('https://mlab.com/base/img/mLab-logo-dark.svg'), none;
+    background-repeat: no-repeat;
+    background-size: 146px 53px;
+}
