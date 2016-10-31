@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable }     from 'rxjs/Observable';
 import { Http, Response } from '@angular/http';
-import { Contact } from './contact/contact';
-import { CONTACTS, CONTACT } from './contact/mockContacts';
+import { Contact } from './contact';
+import { CONTACTS, CONTACT } from './mockContacts';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -19,10 +19,7 @@ export class ContactService {
                    .toPromise()
                    .then(response => response.json() as Contact[])
                    .catch(this.handleError);
-        // return Promise.resolve(CONTACTS);
     }
-
-
 
     // delete("/contacts/:id")
     deleteContact(delContact: Contact): Promise<any> {
@@ -52,8 +49,9 @@ export class ContactService {
     // get("/contacts/:id")
 
     private extractData(res: Response) {
-        let body = res.json();
-        return body.data || { };
+        // let body = res.json();
+        // return body.data || { };
+        return res.json();
     }
 
     private handleError (error: any) {

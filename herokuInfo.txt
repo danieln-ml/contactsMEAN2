@@ -1,0 +1,7 @@
+https://immense-shelf-49080.herokuapp.com/ | https://git.heroku.com/immense-shelf-49080.git
+
+organize the structure
+finish all the fields
+make pretty
+delete button on the details
+Observable vs promise

@@ -1,11 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { ContactService } from '../contact.service';
+import { ContactService } from './contact.service';
 import {Http, Response} from '@angular/http';
 import { Contact } from './contact';
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contacts.component.html',
+  selector: 'app-contacts',
+  template: `
+    <div class="row">
+      <div class="col-md-4">
+        <h2>
+          Contacts
+          <button type="button" class="btn btn-success pull-right"  (click)="createNewContact()">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+        </h2>
+        <ul class="list-group">
+          <li
+            class="list-group-item"
+            *ngFor="let contact of contacts"
+            [class.active]="contact === selectedContact"
+            (click)="selectContact(contact)">
+            {{contact.firstName}} {{contact.lastName}}
+            <span
+              class="glyphicon glyphicon-remove pull-right"
+              (click)="deleteContact(contact)">
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-5 col-md-offset-3">
+        <contact-detail [contact]="selectedContact" [arrayHandler]="modifyContacts()"></contact-detail>
+      </div>
+    </div>
+  `,
   styleUrls: ['./contact.component.css'],
   providers: [ContactService]
 })
@@ -25,18 +53,6 @@ export class ContactsComponent implements OnInit {
         this.selectedContact = contact
     }
 
-    // this is either created elem or an updated response is same for both
-    // add returned value to array
-    modifyContacts(contact: Contact) {
-        for (let i in this.contacts) {
-           if (this.contacts[i]._id === contact._id) {
-             this.contacts[i] = contact
-             return
-           }
-        }
-        this.contacts.push(contact)
-    }
-
     createNewContact() {
         var contact: Contact = {
             firstName: '',
@@ -46,11 +62,28 @@ export class ContactsComponent implements OnInit {
         this.selectContact(contact);
     }
 
+    // this is either created elem or an updated response is same for both
+    // add returned value to array
+    modifyContacts() {
+        var contactsComp: ContactsComponent = this;
+        return (contact: Contact) => {
+          for (let i in contactsComp.contacts) {
+             if (contactsComp.contacts[i]._id === contact._id) {
+               contactsComp.contacts[i] = contact
+               contactsComp.selectContact(contact)
+               return
+             }
+          }
+          contactsComp.contacts.push(contact)
+          contactsComp.selectContact(contact)
+        };
+    }
+
     private removeContactFromContacts(c: Contact) {
-      var idx = this.contacts.findIndex(function(contact) {
+      var idx = this.contacts.findIndex((contact) => {
         return contact._id === c._id;
       });
-      if (idx != -1) {
+      if (idx !== -1) {
         return this.contacts.splice(idx, 1);
       }
       return this.contacts
@@ -58,15 +91,14 @@ export class ContactsComponent implements OnInit {
     }
 
     deleteContact(contact: Contact) {
-      this.contactService.deleteContact(contact).then((function() {
+      this.contactService.deleteContact(contact).then( () => {
         this.removeContactFromContacts(contact);
         this.selectContact(null);
-      }).bind(this));
+      });
     }
 
     getContacts() {
         this.contactService.getContacts().then((contacts: Contact[]) => {
-            console.log(contacts);
             this.contacts = contacts;
         });
     }

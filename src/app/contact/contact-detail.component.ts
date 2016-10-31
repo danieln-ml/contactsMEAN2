@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Contact } from './contact';
-import { ContactService } from '../contact.service';
+import { ContactService } from './contact.service';
 
 @Component({
   selector: 'contact-detail',
   template: `
     <div *ngIf="contact">
-        <h2>Contact Details</h2>
+        <h2 *ngIf="contact._id">Contact Details</h2>
+        <h2 *ngIf="!contact._id">Create Contact</h2>
         <form>
           <div class="form-group">
               <label for="contact-first-name">First Name:</label>
@@ -25,7 +26,7 @@ import { ContactService } from '../contact.service';
           <button class="btn btn-info" *ngIf="contact._id" (click)="updateContact(contact)">Save</button>
         </form>
     </div>
-    `
+  `
 })
 export class ContactDetail {
   @Input()
@@ -39,6 +40,7 @@ export class ContactDetail {
   updateContact(toUpdate: Contact): void {
     this.contactService.updateContact(toUpdate).then((updated: Contact) => {
       this.arrayHandler(updated);
+      this.contact = updated;
     });
   }
 
