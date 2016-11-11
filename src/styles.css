@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #EEE8D5;
+  color: #93A1A1;
+  margin-top: 16px;
+  font: 400 15px 'Roboto',arial,sans-serif;
+}
+h2 {
+  color: #B58900;
+}
+.list-group-item {
+  background-color: #FDF6E3;
+}
+.list-group-item:hover {
+  filter:brightness(105%);
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+  background-color: #2AA198;
+}
+.navbar-default {
+  background-color: #B58900;
+}
+.btn-success, .btn-success:hover {
+  background-color: #859900;
+}
+.btn-success:hover, .btn-info:hover {
+  filter: brightness(110%);
+}
+
+.btn-info, .btn-info:hover {
+  background-color: #268BD2;
+}
+
+.btn {
+  border: none;
+  border-radius: 0;
+}
+.form-control {
+  background-color: #FFFDF0;
+}

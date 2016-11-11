@@ -7,7 +7,7 @@ import { Contact } from './contact';
   selector: 'app-contacts',
   template: `
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 col-md-offset-1">
         <h2>
           Contacts
           <button type="button" class="btn btn-success pull-right"  (click)="createNewContact()">
@@ -28,7 +28,7 @@ import { Contact } from './contact';
         </ul>
       </div>
 
-      <div class="col-md-5 col-md-offset-3">
+      <div class="col-md-4 col-md-offset-1">
         <contact-detail [contact]="selectedContact" [arrayHandler]="modifyContacts()"></contact-detail>
       </div>
     </div>
