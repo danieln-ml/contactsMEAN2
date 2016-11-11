@@ -2,7 +2,7 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { ContactsComponent } from './contacts.component';
-import { ContactService } from '../contact.service';
+import { ContactService } from './contact.service';
 import { Http } from '@angular/http';
 
 import {} from 'jasmine';

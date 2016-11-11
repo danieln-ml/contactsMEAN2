@@ -26,7 +26,8 @@ import { ContactService } from './contact.service';
           <input class="form-control" name="contact-phone-work" [(ngModel)]="contact.phone.work" placeholder="9670309"/>
         </div>
         <button class="btn btn-primary" *ngIf="!contact._id" (click)="createContact(contact)">Create</button>
-        <button class="btn btn-info" *ngIf="contact._id" (click)="updateContact(contact)">Save</button>
+        <button class="btn btn-info" *ngIf="contact._id" (click)="updateContact(contact)">Update</button>
+        <button class="btn btn-danger" *ngIf="contact._id" (click)="deleteContact(contact)">Delete</button>
       </form>
     </div>
   `

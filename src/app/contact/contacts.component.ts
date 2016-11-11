@@ -20,10 +20,6 @@ import { Contact } from './contact';
             [class.active]="contact === selectedContact"
             (click)="selectContact(contact)">
             {{contact.name}}
-            <span
-              class="glyphicon glyphicon-remove pull-right"
-              (click)="deleteContact(contact)">
-            </span>
           </li>
         </ul>
       </div>

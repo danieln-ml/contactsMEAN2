@@ -1,15 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 body {
   background-color: #EEE8D5;
-  color: #93A1A1;
+  color: #657B83;
   margin-top: 16px;
   font: 400 15px 'Roboto',arial,sans-serif;
 }
 h2 {
   color: #B58900;
 }
+
 .list-group-item {
   background-color: #FDF6E3;
+  border: none;
 }
 .list-group-item:hover {
   filter:brightness(105%);
@@ -17,25 +19,49 @@ h2 {
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
   background-color: #2AA198;
+  border-color: #2AA198;
 }
-.navbar-default {
-  background-color: #B58900;
+.list-group-item:last-child {
+  border-radius: 0;
 }
-.btn-success, .btn-success:hover {
-  background-color: #859900;
+.list-group-item:first-child {
+  border-radius: 0;
 }
-.btn-success:hover, .btn-info:hover {
-  filter: brightness(110%);
+.list-group {
+  border: 1px solid #ddd;
 }
 
-.btn-info, .btn-info:hover {
-  background-color: #268BD2;
+.navbar-default {
+  background-color: #B58900;
 }
 
 .btn {
   border: none;
   border-radius: 0;
 }
+
+.btn-success, .btn-success:hover, .btn-success:active, .btn-success:focus {
+  background-color: #859900;
+}
+
+.btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:focus  {
+  background-color: #D33682;
+}
+
+.btn-info, .btn-info:hover, .btn-info:active, .btn-info:focus  {
+  background-color: #268BD2;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus  {
+  background-color: #2AA198;
+}
+
+.btn-success:hover, .btn-info:hover, .btn-info:active, .btn-info:focus {
+  filter: brightness(110%);
+}
+
 .form-control {
   background-color: #FFFDF0;
+  color: #657B83;
+  border: none;
 }
