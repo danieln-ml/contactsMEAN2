@@ -6,25 +6,28 @@ import { ContactService } from './contact.service';
   selector: 'contact-detail',
   template: `
     <div *ngIf="contact">
-        <h2 *ngIf="contact._id">Contact Details</h2>
-        <h2 *ngIf="!contact._id">Create Contact</h2>
-        <form>
-          <div class="form-group">
-              <label for="contact-first-name">First Name:</label>
-              <input class="form-control" name="contact-first-name" [(ngModel)]="contact.firstName" placeholder="First"/>
-          </div>
-          <div class="form-group">
-              <label for="contact-last-name">Last Name:</label>
-              <input class="form-control" name="contact-last-name" [(ngModel)]="contact.lastName" placeholder="Last"/>
-          </div>
-          <div class="form-group">
-              <label for="contact-email">Email:</label>
-              <input class="form-control" name="contact-email" [(ngModel)]="contact.email" placeholder="example@abc.com"/>
-          </div>
-
-          <button class="btn btn-primary" *ngIf="!contact._id" (click)="createContact(contact)">Create</button>
-          <button class="btn btn-info" *ngIf="contact._id" (click)="updateContact(contact)">Save</button>
-        </form>
+      <h2 *ngIf="contact._id">Contact Details</h2>
+      <h2 *ngIf="!contact._id">Create Contact</h2>
+      <form>
+        <div class="form-group">
+          <label for="contact-name">Name:</label>
+          <input class="form-control" name="contact-name" [(ngModel)]="contact.name" placeholder="Name"/>
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Email:</label>
+          <input class="form-control" name="contact-email" [(ngModel)]="contact.email" placeholder="example@abc.com"/>
+        </div>
+        <div class="form-group">
+          <label for="contact-phone-mobile">Mobile:</label>
+          <input class="form-control" name="contact-phone-mobile" [(ngModel)]="contact.phone.mobile" placeholder="6431111"/>
+        </div>
+        <div class="form-group">
+          <label for="contact-phone-work">Work:</label>
+          <input class="form-control" name="contact-phone-work" [(ngModel)]="contact.phone.work" placeholder="9670309"/>
+        </div>
+        <button class="btn btn-primary" *ngIf="!contact._id" (click)="createContact(contact)">Create</button>
+        <button class="btn btn-info" *ngIf="contact._id" (click)="updateContact(contact)">Save</button>
+      </form>
     </div>
   `
 })

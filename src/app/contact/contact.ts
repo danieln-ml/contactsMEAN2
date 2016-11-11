@@ -1,6 +1,13 @@
 export class Contact {
   _id?: number;
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
+  phone: {
+    mobile: string;
+    work: string;
+  }
+}
+class Phones {
+  mobile: string;
+  work: string;
 }

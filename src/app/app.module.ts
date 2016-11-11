@@ -7,7 +7,6 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { ContactsComponent } from './contact/contacts.component';
 import { ContactDetail } from './contact/contact-detail.component';
-import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,8 +18,7 @@ import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
     BrowserModule,
     FormsModule,
     HttpModule,
-    JsonpModule,
-    AlertModule
+    JsonpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,12 +15,11 @@ import { Contact } from './contact';
           </button>
         </h2>
         <ul class="list-group">
-          <li
-            class="list-group-item"
+          <li class="list-group-item"
             *ngFor="let contact of contacts"
             [class.active]="contact === selectedContact"
             (click)="selectContact(contact)">
-            {{contact.firstName}} {{contact.lastName}}
+            {{contact.name}}
             <span
               class="glyphicon glyphicon-remove pull-right"
               (click)="deleteContact(contact)">
@@ -55,9 +54,12 @@ export class ContactsComponent implements OnInit {
 
     createNewContact() {
         var contact: Contact = {
-            firstName: '',
-            lastName: '',
-            email: ''
+            name: '',
+            email: '',
+            phone: {
+              work: '',
+              mobile: ''
+            }
         };
         this.selectContact(contact);
     }

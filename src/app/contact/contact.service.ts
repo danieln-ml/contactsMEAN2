@@ -7,18 +7,19 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ContactService {
-    // requestStream -> responseStream
-    private contactsUrl = '/api/contacts';  // URL to web API
+    // URL to web API
+    private contactsUrl = '/api/contacts';
 
 
     constructor (private http: Http) {}
 
     // get("/contacts")
     getContacts(): Promise<Contact[]> {
-        return this.http.get(this.contactsUrl)
-                   .toPromise()
-                   .then(response => response.json() as Contact[])
-                   .catch(this.handleError);
+        // return this.http.get(this.contactsUrl)
+        //            .toPromise()
+        //            .then(response => response.json() as Contact[])
+        //            .catch(this.handleError);
+        return Promise.resolve(CONTACTS);
     }
 
     // delete("/contacts/:id")
