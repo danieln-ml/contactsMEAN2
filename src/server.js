@@ -8,10 +8,11 @@ var apiRouter = express.Router();
 var CONTACTS_COLLECTION = "contacts";
 
 var app = express();
-app.use(express.static(__dirname + "/dist"));
+app.use(express.static(__dirname + "/../dist"));
 app.use(bodyParser.json());
 
-// Create a database variable outside of the database connection callback to reuse the connection pool in your app.
+// Create a database variable outside of the database connection callback to
+// reuse the connection pool in your app.
 var db;
 
 // Connect to the database before starting the application server.
@@ -56,11 +57,10 @@ apiRouter.route("/contacts")
     });
   })
   .post(function(req, res) {
-      console.log('creating new contact')
       var newContact = req.body;
       newContact.createDate = new Date();
 
-      if (!(req.body.firstName || req.body.lastName)) {
+      if (!req.body.name) {
         handleError(res, "Invalid user input", "Must provide a first or last name.", 400);
       }
 
