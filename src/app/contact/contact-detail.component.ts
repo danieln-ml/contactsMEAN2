@@ -37,20 +37,32 @@ export class ContactDetail {
   contact: Contact;
 
   @Input()
-  arrayHandler: Function;
+  createHandler: Function;
+  @Input()
+  updateHandler: Function;
+  @Input()
+  deleteHandler: Function;
 
   constructor (private contactService: ContactService) {}
 
   updateContact(toUpdate: Contact): void {
     this.contactService.updateContact(toUpdate).then((updated: Contact) => {
-      this.arrayHandler(updated);
+      this.updateHandler(updated);
       this.contact = updated;
+    });
+  }
+
+
+  deleteContact(toDelete: Contact): void {
+    this.contactService.deleteContact(toDelete).then((deletedId: number) => {
+      this.deleteHandler(toDelete);
+      this.contact = null;
     });
   }
 
   createContact(newContact: Contact) {
     this.contactService.createContact(newContact).then((created: Contact) => {
-      this.arrayHandler(created);
+      this.createHandler(created);
       this.contact = created;
     });
   }

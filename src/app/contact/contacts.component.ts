@@ -14,7 +14,12 @@ import { Contact } from './contact';
             <span class="glyphicon glyphicon-plus"></span>
           </button>
         </h2>
-        <ul class="list-group">
+
+        <div *ngIf="loaded && contacts.length == 0" class="error">
+          No Contacts add a contact
+        </div>
+
+        <ul *ngIf="loaded && contacts.length > 0" class="list-group">
           <li class="list-group-item"
             *ngFor="let contact of contacts"
             [class.active]="contact === selectedContact"
@@ -25,7 +30,12 @@ import { Contact } from './contact';
       </div>
 
       <div class="col-md-4 col-md-offset-1">
-        <contact-detail [contact]="selectedContact" [arrayHandler]="modifyContacts()"></contact-detail>
+        <contact-detail
+          [contact]="selectedContact"
+          [createHandler]="addContact.bind(this)"
+          [updateHandler]="updateContact.bind(this)"
+          [deleteHandler]="deleteContact.bind(this)">
+        </contact-detail>
       </div>
     </div>
   `,
@@ -37,11 +47,13 @@ export class ContactsComponent implements OnInit {
     title: 'Contacts List'
     contacts: Contact[]
     selectedContact: Contact
+    loaded: boolean
 
     constructor (private contactService: ContactService) {}
 
     ngOnInit() {
-        this.getContacts();
+      this.loaded = false;
+      this.getContacts();
     }
 
     selectContact(contact: Contact) {
@@ -60,44 +72,36 @@ export class ContactsComponent implements OnInit {
         this.selectContact(contact);
     }
 
-    // this is either created elem or an updated response is same for both
-    // add returned value to array
-    modifyContacts() {
-        var contactsComp: ContactsComponent = this;
-        return (contact: Contact) => {
-          for (let i in contactsComp.contacts) {
-             if (contactsComp.contacts[i]._id === contact._id) {
-               contactsComp.contacts[i] = contact
-               contactsComp.selectContact(contact)
-               return
-             }
-          }
-          contactsComp.contacts.push(contact)
-          contactsComp.selectContact(contact)
-        };
-    }
-
-    private removeContactFromContacts(c: Contact) {
-      var idx = this.contacts.findIndex((contact) => {
-        return contact._id === c._id;
+    // Array Updates Funcitons
+    deleteContact(contact: Contact) {
+      var idx = this.contacts.findIndex((c) => {
+        return c._id === contact._id;
       });
       if (idx !== -1) {
         return this.contacts.splice(idx, 1);
       }
       return this.contacts
-
     }
 
-    deleteContact(contact: Contact) {
-      this.contactService.deleteContact(contact).then( () => {
-        this.removeContactFromContacts(contact);
-        this.selectContact(null);
-      });
+    addContact(contact: Contact) {
+      this.contacts.push(contact)
+      return this.contacts;
     }
 
+    updateContact(contact: Contact) {
+      for (let i in this.contacts) {
+        if (this.contacts[i]._id === contact._id) {
+          this.contacts[i] = contact
+        }
+      }
+      return this.contacts;
+    }
+
+    // Promise Functions
     getContacts() {
-        this.contactService.getContacts().then((contacts: Contact[]) => {
-            this.contacts = contacts;
-        });
+      this.contactService.getContacts().then((contacts: Contact[]) => {
+        this.loaded = true;
+        this.contacts = contacts
+      });
     }
 }
